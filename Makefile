@@ -13,8 +13,7 @@ HS_OBJ=$(patsubst %, $(HS_SRC)/%.o, $(_HS_FILES))
 
 CPP_OBJ=$(patsubst %, $(HS_SRC)/%.o, $(_CPP_FILES))
 
-
-COMP_FLAGS=-lstdc++ -Iinclude
+COMP_FLAGS=-lstdc++
 
 all: compileHS main
 
@@ -22,10 +21,9 @@ compileHS: $(HS_OBJ)
 
 $(HS_OBJ): $(HS_FILES)
 	$(COMP) -c -O $@ $<
-	mv $(HS_SRC)/*.h include/
 
 $(CPP_OBJ): $(CPP_FILES)
-	$(COMP) -c -O $@ $< -Iinclude
+	$(COMP) -c -O $@ $< -I$(HS_SRC)
 
 main: $(CPP_OBJ) $(HS_OBJ)
-	$(COMP) --make -no-hs-main -optc-O $(CPP_FILES) $(HS_SRC)/$(_HS_FILES) -o bin/main $(COMP_FLAGS)
+	$(COMP) --make -no-hs-main -optc-O $(CPP_FILES) $(HS_SRC)/$(_HS_FILES) -o bin/main $(COMP_FLAGS) -I$(HS_SRC)

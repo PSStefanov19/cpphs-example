@@ -2,4 +2,5 @@
 *.o
 *.obj
 *.hi
+src/Haskell/*.h
 .vscode
