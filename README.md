@@ -11,4 +11,8 @@ ghc
 
 ### Compilation
 
-J
+Just run:
+
+```bash
+make
+```
